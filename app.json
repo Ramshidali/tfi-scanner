@@ -1,0 +1,8 @@
+{
+  "name": "tfiss",
+  "displayName": "tfiss",
+  "expo": {
+    "jsEngine": "hermes"
+  }
+}
+
