@@ -1,8 +1,8 @@
-import { React, useState } from "react";
-import { TextInput, Button, View, StyleSheet, TouchableOpacity, ImageBackground } from "react-native";
-// import Navigation from '../components/Navigation';
-// import Background from "../components/Background.js";
-import bgimage from "../assets/bg-image.jpg"
+import React, {useState} from 'react';
+import {View, Text, Image} from 'react-native';
+import Btn from '../components/Btn';
+import {darkGreen} from '../components/Constants';
+import Field from '../components/Field';
 
 
 const LoginScreen = ({navigation}) => {
@@ -11,53 +11,49 @@ const LoginScreen = ({navigation}) => {
 
     return (
         
-        <View style={styles.container}>
-            <ImageBackground source={bgimage} style={{ height: '100%', width: "100%" }} />
-            <View style={styles.wrapper}>
-                <View style={styles.loginContainer}>
-                    <TextInput 
-                        style={styles.input}
-                        value={email}  
-                        placeholder="Enter Email" 
-                        onChangeText={text => setEmail(text)}
-                    />
-
-                    <TextInput 
-                        style={styles.input} 
-                        value={password}
-                        placeholder="Enter Password"
-                        onChangeText={text => setPassword(text)} 
-                        secureTextEntry
-                    />
-                    <Button title="Login" onPress={() => navigation.navigate('Scanner')} />
-                </View>
-            </View>
+      <View style={{alignItems: 'center',}}>
+        <View
+          style={{
+            backgroundColor: 'white',
+            height: "100%",
+            width: "100%",
+            paddingTop: 100,
+            alignItems: 'center',
+          }}>
+            <Image 
+                style={{
+                    height: 70,
+                    width: 70,
+                    marginBottom: 20,
+                }}
+                source={require('../assets/logo.png')}
+            />
+          {/* <Text style={{fontSize: 30, color: darkGreen, fontWeight: 'bold'}}>
+            Welcome To TFISS
+          </Text> */}
+          <Text
+            style={{
+              color: 'grey',
+              fontSize: 19,
+              fontWeight: 'bold',
+              marginBottom: 30,
+            }}>
+            Login to your account
+          </Text>
+          <Field placeholder="Email id" keyboardType={'email-address'} />
+          <Field placeholder="Password" secureTextEntry={true} />
+          <View
+            style={{alignItems: 'flex-end', width: '78%', paddingRight: 16, marginBottom: 20}}>
+            <Text style={{color: darkGreen, fontWeight: 'bold', fontSize: 16}}>
+              Forgot Password ?
+            </Text>
+          </View>
+          <Btn textColor='white' bgColor={darkGreen} btnLabel="Login" Press={() => navigation.navigate('Scanner')} />
         </View>
+      </View>
+    
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    wrapper: {
-        padding: "5%",
-        margin: '0',
-        position: "absolute",
-    },
-    loginContainer: {
-        padding: "10%",
-        backgroundColor: "white"
-    },
-    input: {
-        marginBottom: 12,
-        borderWidth: 1,
-        borderColor: "#bbb",
-        borderRadius: 5,
-        paddingHorizontal: 14,
-    },
-});
 
 export default LoginScreen;

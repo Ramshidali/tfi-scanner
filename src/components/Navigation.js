@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from "../screens/HomeScreen";
+import EntryScreen from "../screens/EntryScreen";
 import LoginScreen from "../screens/LoginScreen";
 import ScannerScreen from "../screens/ScannerScreen";
 
@@ -14,9 +14,9 @@ const Navigation = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name="Scanner" component={ScannerScreen} options={{headerShown: false}} /> 
                 <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}} /> 
-                <Stack.Screen name="Home" component={HomeScreen} /> 
+                <Stack.Screen name="Scanner" component={ScannerScreen} options={{headerShown: false}} /> 
+                <Stack.Screen name="Entry" component={EntryScreen} options={{headerShown: false}} /> 
             </Stack.Navigator>
         </NavigationContainer>
     );
