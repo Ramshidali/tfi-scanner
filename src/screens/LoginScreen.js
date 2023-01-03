@@ -40,8 +40,8 @@ const LoginScreen = ({navigation}) => {
             }}>
             Login to your account
           </Text>
-          <Field placeholder="Email id" keyboardType={'email-address'} />
-          <Field placeholder="Password" secureTextEntry={true} />
+          <Field placeholder="Email id" value={email} keyboardType={'email-address'} />
+          <Field placeholder="Password" value={password} secureTextEntry={true} />
           <View
             style={{alignItems: 'flex-end', width: '78%', paddingRight: 16, marginBottom: 20}}>
             <Text style={{color: darkGreen, fontWeight: 'bold', fontSize: 16}}>

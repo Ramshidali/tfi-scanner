@@ -1,21 +1,12 @@
 import React, { useState } from 'react';
-import { Text, View, Image } from "react-native";
+import { Text, View, Image, Alert } from "react-native";
 import Btn from '../components/Btn';
 import {darkGreen} from '../components/Constants';
 import Field from '../components/Field';
 
-const EntryScreen = (props) => {
+const EntryScreen = ({navigation}) => {
     const [cover, setCover] = useState('');
     const [amount, setAmount] = useState('');
-    
-    getValues = ()=> {
-
-    alert(
-        "number of covers : " + cover
-        + "\n" +
-        "Amount : " + amount
-        );
-    }
 
     return (
         <View style={{alignItems: 'center',}}>
@@ -77,7 +68,7 @@ const EntryScreen = (props) => {
                     onChangeText={amount => setAmount(amount)}
                 />
                 <View style={{alignItems: 'flex-end', width: '78%', paddingRight: 16, marginBottom: 20}}></View>
-                <Btn textColor='white' bgColor={darkGreen} btnLabel="Submit" Press={() => getValues()} />
+                <Btn textColor='white' bgColor={darkGreen} btnLabel="Submit" Press={() => navigation.navigate('Success')} />
                 
             </View>
         </View>

@@ -1,46 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
-import { BarCodeScanner } from 'expo-barcode-scanner';
+import React from 'react';
+import {
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  useColorScheme,
+  Dimensions,
+} from 'react-native';
 
-const ScannerScreen = () => {
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_WIDTH = Dimensions.get("window").width;
+const scanBarWidth = SCREEN_WIDTH * 0.46;
 
-  const [hasPermission, setHasPermission] = useState('');
-  const [scanned, setScanned] = useState(false);
 
-  useEffect(() => {
-    const getBarCodeScannerPermissions = async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
-    };
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import {RNCamera} from 'react-native-camera';
 
-    getBarCodeScannerPermissions();
-  }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true);
+const ScannerScreen = ({navigation}) => {
+
+  const onSuccess = e => {
+    console.log(e, 'data');
     navigation.navigate('Entry')
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
-  if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
-  }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
-  }
   
   // Return the View
   return (
-    <View style={styles.container}>
-      <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
+    <SafeAreaView>
+      <StatusBar />
+      <QRCodeScanner
+        onRead={onSuccess}
+        flashMode={RNCamera.Constants.FlashMode.auto}
+        cameraStyle={{ height: SCREEN_HEIGHT }}
+        cameraProps={{captureAudio: false}}
+        style={{height: 50, width: 50, borderRadius: 10}}
       />
-      {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
-    </View>
+    </SafeAreaView>
+    
   );
-}
-
+};
 
 const styles = StyleSheet.create({});
 
